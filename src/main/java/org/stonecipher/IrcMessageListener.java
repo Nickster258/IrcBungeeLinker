@@ -19,13 +19,13 @@ public class IrcMessageListener extends ListenerAdapter {
     }
 
     public void onEvent(GenericMessageEvent event) throws Exception {
-        ps.getScheduler().schedule(p, new Runnable() {
+        ps.getScheduler().runAsync(p, new Runnable() {
             @Override
             public void run() {
                 TextComponent bs = new TextComponent("IRC | " + event.getUser() + ": " + event.getMessage());
                 ps.broadcast(bs);
             }
-        }, 0, TimeUnit.SECONDS);
+        });
 
     }
 }
